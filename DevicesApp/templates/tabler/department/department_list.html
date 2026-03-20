@@ -1,0 +1,366 @@
+{% extends '../index.html' %}
+{% load static %}
+  
+  {% block page_wrapper %}
+   <div class="page-wrapper custom-list-page">
+  {% block wraper_header %}
+    
+      <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <!-- Page pre-title -->
+                <div class="page-pretitle">View All</div>
+                <h2 class="page-title">Department List</h2>
+              </div>
+              <!-- Page title actions -->
+            
+            </div>
+          </div>
+      </div>
+  {% endblock %}
+
+  {% block wraper_body %}
+   
+  <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">                     
+           
+         
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Departments</h3>
+                  </div>
+                  <div class="card-body border-bottom py-3">
+                   
+               <div class="d-flex">
+               <div class="col-auto ms-auto d-print-none text-secondary">
+                <div class="btn-list">
+               
+              
+                   
+
+                  <a
+                    class="btn btn-pill btn-primary"
+                    href="#"                    
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-department"
+                    aria-label="Create new department"
+                  >
+                   
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-2"
+                    >
+                      <path d="M12 5l0 14" />
+                      <path d="M5 12l14 0" />
+                    </svg>
+                    New department 
+                  </a>
+                           
+                
+             
+                </div>
+                <!-- BEGIN MODAL -->
+                <!-- END MODAL -->
+              </div>
+               </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-selectable card-table table-vcenter text-nowrap table-striped table-hover datatable">
+                      <thead>
+                        <tr>
+                       
+                          <th >
+                            No.                         
+                          
+                          </th>   
+                          <th>
+                            Name
+                          </th>                
+                       <th>
+                         Branch
+                       </th>
+                         
+                          <th class="text-end">Options</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                   
+                      {% for dept in departments %}
+                      <tr>                    
+
+                        <td>
+                          <span class="text-secondary">{{ forloop.counter }}</span>
+                        </td>                    
+                        <td>
+                            <a href="#" class="text-reset" tabindex="-1">
+                            {{ dept.name }}
+                          </a>
+                         
+                        </td>
+                        <td>{{ dept.branch.name }}</td>
+
+                      
+
+                        <td class="text-end">
+
+                        <button class="btn btn-sm btn-warning btn-edit"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-edit"
+                        data-id="{{ dept.id }}"
+                        data-branch="{{ dept.branch.id }}"           
+                        data-name="{{ dept.name }}"
+                       >
+              <svg xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler me-1"
+                  width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M0 0h24v24H0z" stroke="none"/>
+                <path d="M15 6l3 3l-9 9H6v-3l9-9"/>
+              </svg>
+                              Edit
+                        </button>
+
+              <button class="btn btn-sm btn-danger btn-delete"
+                    data-bs-toggle="modal"       
+                    data-bs-target="#modal-delete"
+                    data-id="{{ dept.id }}"
+                    data-name="{{ dept.name }}">
+                
+                  
+                    
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler me-1"
+                  width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M0 0h24v24H0z" stroke="none"/>
+                <path d="M4 7h16"/>
+                <path d="M10 11v6"/>
+                <path d="M14 11v6"/>
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"/>
+                <path d="M9 7V4h6v3"/>
+              </svg>
+              Delete
+            </button>
+               
+                        </td>
+
+                      </tr>
+                      {% endfor %}
+                      </tbody>
+                     
+                    </table>
+                  </div>
+                  <div class="card-footer">
+                
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+      {% block footer%}
+       {% include '../partials/footer.html'%}
+      {% endblock %}
+    </div>
+
+<!-- ======================
+CREATE MODAL
+====================== -->
+<div class="modal modal-blur fade" id="modal-department">
+  <div class="modal-dialog modal-lg modal-dialog-top">
+    <div class="modal-content">
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="modal-header">
+          <h5 class="modal-title">Create Department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body row">
+
+          {% if form.non_field_errors %}
+          <div class="col-12">
+            <div class="alert alert-danger">
+              {{ form.non_field_errors }}
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Branch</label>
+            {{ form.branch }}
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Name</label>
+            {{ form.name }}
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- ======================
+EDIT MODAL
+====================== -->
+<div class="modal modal-blur fade" id="modal-edit">
+  <div class="modal-dialog modal-lg modal-dialog-top">
+    <div class="modal-content">
+
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="department_id" id="edit-id">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body row">
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Branch</label>
+            <select name="branch" id="edit-branch" class="form-select">
+              {% for b in branches %}
+                <option value="{{ b.id }}">{{ b.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" id="edit-name" class="form-control">
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- ======================
+DELETE MODAL
+====================== -->
+<div class="modal modal-blur fade" id="modal-delete">
+  <div class="modal-dialog modal-sm modal-dialog-top">
+    <div class="modal-content">
+
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="delete_department" value="1">
+        <input type="hidden" name="department_id" id="delete-id">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body text-center">
+          <p>Are you sure?</p>
+          <strong id="delete-name"></strong>
+        </div>
+
+        <div class="modal-footer">
+          <!-- 🔥 FIX IMPORTANTE -->
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+          </button>
+
+          <button type="submit" class="btn btn-danger">
+            Delete
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Simple Datatables CSS -->
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet">
+
+<!-- Simple Datatables JS -->
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" ></script>
+
+<!--Datatable-->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const tables = document.querySelectorAll(".datatable");
+
+  tables.forEach(table => {
+    new simpleDatatables.DataTable(table, {
+      columns: [
+        {
+          select: 3,
+          sortable: false
+        }
+      ]
+    });
+  });
+
+});
+</script>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // EDIT
+  document.querySelectorAll(".btn-edit").forEach(btn => {
+    btn.addEventListener("click", function () {
+      document.getElementById("edit-id").value = this.dataset.id;
+      document.getElementById("edit-name").value = this.dataset.name;
+      document.getElementById("edit-branch").value = this.dataset.branch;
+    });
+  });
+
+  // DELETE
+  document.querySelectorAll(".btn-delete").forEach(btn => {
+    btn.addEventListener("click", function () {
+      document.getElementById("delete-id").value = this.dataset.id;
+      document.getElementById("delete-name").textContent = this.dataset.name;
+    });
+  });
+
+});
+</script>
+  
+
+   {% endblock%}

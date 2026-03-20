@@ -1,0 +1,626 @@
+{% extends '../index.html' %} 
+{% load static %} 
+{% block page_wrapper %}
+<div class="page-wrapper custom-list-page">
+  {% block wraper_header %}
+
+  <div class="page-header d-print-none" aria-label="Page header">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <!-- Page pre-title -->
+          <div class="page-pretitle">View All</div>
+          <h2 class="page-title">Printers</h2>
+        </div>
+        <!-- Page title actions -->
+      </div>
+    </div>
+  </div>
+  {% endblock %} 
+  {% block wraper_body %}
+
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row row-deck row-cards">
+      <!--
+        <div class="col-12">
+          <div class="row row-cards">
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <span class="bg-primary text-white avatar">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="icon icon-1"
+                        >
+                          <path
+                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"
+                          />
+                          <path d="M12 3v3m0 12v3" /></svg
+                      ></span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">132 Sales</div>
+                      <div class="text-secondary">12 waiting payments</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <span class="bg-green text-white avatar">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="icon icon-1"
+                        >
+                          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                          <path d="M17 17h-11v-14h-2" />
+                          <path d="M6 5l14 1l-1 7h-13" /></svg
+                      ></span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">78 Orders</div>
+                      <div class="text-secondary">32 shipped</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <span class="bg-x text-white avatar"
+                        >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="icon icon-1"
+                        >
+                          <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                          <path
+                            d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"
+                          /></svg
+                      ></span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">623 Shares</div>
+                      <div class="text-secondary">16 today</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+              <div class="card card-sm">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <span class="bg-facebook text-white avatar"
+                        >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="icon icon-1"
+                        >
+                          <path
+                            d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"
+                          /></svg
+                      ></span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">132 Likes</div>
+                      <div class="text-secondary">21 today</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      -->
+
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Devices</h3>
+            </div>
+            <div class="card-body border-bottom py-3">
+              <div class="d-flex">
+                <div class="col-auto ms-auto d-print-none text-secondary">
+                  <div class="btn-list">
+                    <a
+                      class="btn btn-pill btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modal-printer"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-2"
+                      >
+                        <path d="M12 5l0 14" />
+                        <path d="M5 12l14 0" />
+                      </svg>
+
+                      Create new device
+                    </a>
+                  </div>
+                  <!-- BEGIN MODAL -->
+                  <!-- END MODAL -->
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table
+                class="table table-selectable card-table table-vcenter text-nowrap table-striped table-hover datatable"
+              >
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Department</th>
+                    <th>Name</th>
+                    <th>Ip Address</th>                 
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for device in printers %}
+                  <tr>
+                    <td>
+                      <span class="text-secondary">{{ forloop.counter }}</span>
+                    </td>
+
+                    <td>{{ device.department }}</td>
+
+                    <td>{{ device.name }}</td>
+                    <td >{{ device.ip_address }}</td>
+                    <td>{{ device.username }}</td>
+
+                    <td>
+                      <span id="pwd-{{ device.id }}">**********</span>
+                      <span id="realpwd-{{ device.id }}" style="display: none">
+                        {{ device.password }}
+                      </span>
+
+                      <button
+                        class="btn btn-sm btn-pill btn-teal ms-2"
+                        onclick="togglePassword('{{ device.id }}')"
+                        title="View / Hide password"
+                      >
+                        <!-- Icono de ojo -->
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-eye"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <circle cx="12" cy="12" r="2" />
+                          <path
+                            d="M22 12c0 0 -4 -8 -10 -8s-10 8 -10 8s4 8 10 8s10 -8 10 -8"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+
+                    <td class="text-end">
+                      <button
+                        class="btn btn-sm btn-warning btn-edit"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-edit"
+                        data-id="{{ device.id }}"
+                        data-department="{{ device.department.id }}"
+                        data-name="{{ device.name }}"
+                        data-ip-address="{{ device.ip_address }}"
+                        data-username="{{ device.username }}"   
+                        data-password="{{ device.password }}"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler me-1"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M0 0h24v24H0z" stroke="none" />
+                          <path d="M15 6l3 3l-9 9H6v-3l9-9" />
+                        </svg>
+
+                        Edit
+                      </button>
+
+                      <button
+                        class="btn btn-sm btn-danger btn-delete"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-delete"
+                        data-id="{{ device.id }}"
+                        data-name="{{ device.name }}"                       
+                        data-department="{{ device.department}}"
+                        
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler me-1"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M0 0h24v24H0z" stroke="none" />
+                          <path d="M4 7h16" />
+                          <path d="M10 11v6" />
+                          <path d="M14 11v6" />
+                          <path
+                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"
+                          />
+                          <path d="M9 7V4h6v3" />
+                        </svg>
+
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %} 
+  {% block footer%}
+   {% include '../partials/footer.html'%}
+    {% endblock %}
+</div>
+<!-- Create Modal-->
+<div class="modal modal-blur fade" id="modal-printer" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="modal-header">
+          <h5 class="modal-title">Create new device</h5>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Department</label>
+              <select
+                name="department"
+                id="create-department"
+                class="form-select"
+              >
+                {% for dept in departments %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+           <!-- Name -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" name="name" id="name" class="form-control">
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Ip Address</label>
+              <input type="text" name="ip_address" id="ipaddress" class="form-control">
+            </div>
+
+
+            <div class="col-md-6 mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" id="username" class="form-control">            
+            </div>
+
+
+           <div class="col-md-6 mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control">
+           </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">
+            Cancel
+          </button>
+
+          <button type="submit" class="btn btn-primary">Save Device</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div class="modal modal-blur fade" id="modal-edit" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="printer_id" id="edit-printer-id" />
+
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Printer</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Department</label>
+              <select
+                name="department"
+                id="edit-department"
+                class="form-select"
+              >
+                {% for dept in departments %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="edit-name"
+                class="form-control"
+              />
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Ip Address</label>
+              <input
+                type="text"
+                name="ip_address"
+                id="edit-ip-address"
+                class="form-control"
+              />
+            </div>  
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Username</label>
+                <input  
+                  type="text"
+                  name="username"
+                  id="edit-username"
+                  class="form-control"
+                />
+              </div>
+                    
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Password</label>
+              <input
+                type="text"
+                name="password"
+                id="edit-password"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal modal-blur fade" id="modal-delete" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form method="post" id="form-delete">
+        {% csrf_token %}
+        <input type="hidden" name="delete_printer" value="1" />
+        <input type="hidden" name="printer_id" id="delete-printer-id" />
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Device</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Are you sure you want to delete
+            <strong id="delete-device-name"></strong>
+            from
+            <strong id="delete-device-department"></strong>?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Simple Datatables CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
+  rel="stylesheet"
+/>
+
+<!-- Simple Datatables JS -->
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"></script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const createModal = document.getElementById("modal-printer");
+
+  createModal.addEventListener("show.bs.modal", function () {
+    const form = this.querySelector("form");
+    form.reset();
+  });
+
+});
+</script>
+<!--Datatable-->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tables = document.querySelectorAll(".datatable");
+
+    tables.forEach((table) => {
+      new simpleDatatables.DataTable(table, {
+        columns: [
+          {
+            select: 6,
+            sortable: false,
+          },
+        ],
+      });
+    });
+  });
+</script>
+
+<!-- Edit Modal Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".btn-edit").forEach(button => {
+    button.addEventListener("click", function () {
+
+      document.getElementById("edit-printer-id").value = this.dataset.id;
+      document.getElementById("edit-name").value = this.dataset.name;
+      document.getElementById("edit-ip-address").value = this.dataset.ipAddress;
+      document.getElementById("edit-username").value = this.dataset.username;
+      document.getElementById("edit-password").value = this.dataset.password;
+      document.getElementById("edit-department").value = this.dataset.department;
+
+    });
+  });
+});
+</script>
+
+<!--Delete modal-->
+<script>
+ document.addEventListener("DOMContentLoaded", function () {
+  const deleteButtons = document.querySelectorAll(".btn-delete");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      document.getElementById("delete-printer-id").value = this.dataset.id;
+
+      document.getElementById("delete-device-name").textContent =
+        this.dataset.name;
+
+      document.getElementById("delete-device-department").textContent =
+        this.dataset.department;
+    });
+  });
+});
+</script>
+
+# Toggle Password Script
+<script>
+  function togglePassword(id) {
+    let hidden = document.getElementById("pwd-" + id);
+    let real = document.getElementById("realpwd-" + id);
+
+    if (real.style.display === "none") {
+      real.style.display = "inline";
+      hidden.style.display = "none";
+    } else {
+      real.style.display = "none";
+      hidden.style.display = "inline";
+    }
+  }
+</script>
+
+{% endblock%}

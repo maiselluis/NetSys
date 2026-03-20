@@ -1,0 +1,909 @@
+{% extends '../index.html' %}
+{% load static %}
+  
+  {% block page_wrapper %}
+   <div class="page-wrapper custom-list-page">
+  {% block wraper_header %}
+    
+      <div class="page-header d-print-none" aria-label="Page header">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <!-- Page pre-title -->
+                <div class="page-pretitle">View All</div>
+                <h2 class="page-title">Pc/Tablet/Server</h2>
+              </div>
+              <!-- Page title actions -->
+            
+            </div>
+          </div>
+      </div>
+  {% endblock %}
+
+  {% block wraper_body %}
+   
+  <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-deck row-cards">                     
+            <!--
+              <div class="col-12">
+                <div class="row row-cards">
+                  <div class="col-sm-6 col-lg-3">
+                    <div class="card card-sm">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
+                            <span class="bg-primary text-white avatar"
+                              >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-1"
+                              >
+                                <path d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2" />
+                                <path d="M12 3v3m0 12v3" /></svg
+                            ></span>
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">132 Sales</div>
+                            <div class="text-secondary">12 waiting payments</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <div class="card card-sm">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
+                            <span class="bg-green text-white avatar"
+                              >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-1"
+                              >
+                                <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M17 17h-11v-14h-2" />
+                                <path d="M6 5l14 1l-1 7h-13" /></svg
+                            ></span>
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">78 Orders</div>
+                            <div class="text-secondary">32 shipped</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <div class="card card-sm">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
+                            <span class="bg-x text-white avatar"
+                              >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-1"
+                              >
+                                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg
+                            ></span>
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">623 Shares</div>
+                            <div class="text-secondary">16 today</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-lg-3">
+                    <div class="card card-sm">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
+                            <span class="bg-facebook text-white avatar"
+                              >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-1"
+                              >
+                                <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg
+                            ></span>
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">132 Likes</div>
+                            <div class="text-secondary">21 today</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                           
+            -->
+         
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Devices</h3>
+                  </div>
+                  <div class="card-body border-bottom py-3">
+                   
+               <div class="d-flex">
+               <div class="col-auto ms-auto d-print-none text-secondary">
+                <div class="btn-list">
+                 <!-- <span class="d-none d-sm-inline">
+                    <a href="#" class="btn btn-pill btn-success"> New Department </a>
+                  </span>-->
+              
+                    <a class="btn btn-pill btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#modal-device">
+
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="icon icon-2">
+                            <path d="M12 5l0 14" />
+                            <path d="M5 12l14 0" />
+                          </svg>
+
+                          Create new device
+                   </a>
+
+                  <a
+                    class="btn btn-pill btn-teal"
+                    href="#"                    
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-department"
+                    aria-label="Create new department"
+                  >
+                   
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-2"
+                    >
+                      <path d="M12 5l0 14" />
+                      <path d="M5 12l14 0" />
+                    </svg>
+                    New department 
+                  </a>
+                           
+                
+             
+                </div>
+                <!-- BEGIN MODAL -->
+                <!-- END MODAL -->
+              </div>
+               </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-selectable card-table table-vcenter text-nowrap table-striped table-hover datatable">
+                      <thead>
+                        <tr>
+                       
+                          <th >
+                            No.
+                            <!-- Download SVG icon from http://tabler.io/icons/icon/chevron-up -->
+                          
+                          </th>                        
+                          <th>Department</th>
+                          <th>Name</th>
+                          <th>Ip Address</th>
+                          <th>Mac Address</th>
+                          <th>Any Desk</th>
+                           <th>Rust Desk</th>
+                           <th>Remote?</th>
+                          <th>Options</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                   
+                      {% for device in devices %}
+                      <tr>                    
+
+                        <td>
+                          <span class="text-secondary">{{ forloop.counter }}</span>
+                        </td>                    
+                        <td>
+                            <a href="#" class="text-reset" tabindex="-1">
+                            {{ device.department.name }}
+                          </a>
+                         
+                        </td>
+
+                        <td>
+                          {{ device.name }}
+                        </td>
+
+                       <td>
+                          {% for ip in device.ip_addresses.all %}
+                            
+                            <span class="badge bg-blue-lt">{{ ip.ip_address }}</span>
+                          {% endfor %}
+                        </td>
+
+                        <td>
+                          {{ device.mac_address }}
+                        </td>
+
+                        <td>
+                          {{ device.any_desk }}
+                        </td>
+
+                        <td>
+                          {{ device.rust_desk }}
+                        </td>
+
+                        <td>
+                          {% if device.remote_desktop %}
+                          <span class="badge bg-success-lt">Yes</span>
+                             
+                          {% else %}
+                          <span class="badge bg-danger-lt">No</span>
+                              
+                          {% endif %}
+                        </td>
+
+                        <td class="text-end">
+
+                        <button class="btn btn-sm btn-warning btn-edit"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-edit"
+                        data-id="{{ device.id }}"
+                        data-department="{{ device.department.id }}"           
+                        data-name="{{ device.name }}"
+                        data-ip='[
+                                    {% for ip in device.ip_addresses.all %}
+                                    {"id":"{{ ip.id }}","ip":"{{ ip.ip_address }}"}{% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                                  ]'                     
+                        data-mac="{{ device.mac_address }}"
+                        data-anydesk="{{ device.any_desk }}"
+                        data-rustdesk="{{ device.rust_desk }}"
+                        data-remote="{{ device.remote_desktop }}">
+                         <!-- Icono lápiz de Tabler -->
+  <svg xmlns="http://www.w3.org/2000/svg"
+       class="icon icon-tabler me-1"
+       width="24" height="24" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 0h24v24H0z" stroke="none"/>
+    <path d="M15 6l3 3l-9 9H6v-3l9-9"/>
+  </svg>
+                              Edit
+                        </button>
+
+                <button class="btn btn-sm btn-danger btn-delete"
+        data-bs-toggle="modal"
+        data-bs-target="#modal-delete"
+        data-id="{{ device.id }}"
+        data-name="{{ device.name }}"
+        data-department-name="{{ device.department.name  }}">
+         <!-- Icono basura de Tabler -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+       class="icon icon-tabler me-1"
+       width="24" height="24" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 0h24v24H0z" stroke="none"/>
+    <path d="M4 7h16"/>
+    <path d="M10 11v6"/>
+    <path d="M14 11v6"/>
+    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"/>
+    <path d="M9 7V4h6v3"/>
+  </svg>
+  Delete
+</button>
+               
+                        </td>
+
+                      </tr>
+                      {% endfor %}
+                      </tbody>
+                     
+                    </table>
+                  </div>
+                  <div class="card-footer">
+                
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+      {% block footer%}
+       {% include '../partials/footer.html'%}
+      {% endblock %}
+    </div>
+<!-- Create Modal-->
+<div class="modal modal-blur fade" id="modal-device" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <form method="post">
+
+        {% csrf_token %}
+
+          <!-- IMPORTANTE PARA DJANGO FORMSET -->
+        {{ ip_formset.management_form }}
+
+        <div class="modal-header">
+          <h5 class="modal-title">Create new device</h5>
+
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal">
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="row">
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Department</label>
+              {{ form.department }}
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Name</label>
+              {{ form.name }}
+            </div>
+
+           
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">MAC Address</label>
+              {{ form.mac_address }}
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">AnyDesk</label>
+              {{ form.any_desk }}
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label">RustDesk</label>
+              {{ form.rust_desk }}
+            </div>
+
+            <div class="col-12">
+              <label class="form-check">
+                {{ form.remote_desktop }}
+                <span class="form-check-label">
+                  Remote Desktop Enabled
+                </span>
+              </label>
+            </div>
+
+             <!-- IP Addresses FormSet -->
+            <div class="col-12 mb-3">
+              <label class="form-label">IP Addresses</label>
+              <div id="ip-addresses-container">
+
+                {% for ip_form in ip_formset %}
+                  <div class="input-group mb-2 ip-field">
+                    {{ ip_form.ip_address }}
+                    {% if ip_form.instance.pk %}
+                      <button type="button" class="btn btn-outline-danger btn-sm remove-ip">Remove</button>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+              <button type="button" class="btn btn-sm btn-secondary mt-2" id="add-ip">Add IP</button>
+            </div>
+
+         
+
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+          <button type="button"
+                  class="btn me-auto"
+                  data-bs-dismiss="modal">
+            Cancel
+          </button>
+
+          <button type="submit"
+                  class="btn btn-primary">
+            Save Device
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal modal-blur fade" id="modal-edit" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <form method="post" id="form-edit">
+        {% csrf_token %}
+
+         <!-- FormSet Management -->
+        <input type="hidden" name="ip_addresses-TOTAL_FORMS" id="edit-total-forms">
+        <input type="hidden" name="ip_addresses-INITIAL_FORMS" id="edit-initial-forms">
+        <input type="hidden" name="ip_addresses-MIN_NUM_FORMS" value="0">
+        <input type="hidden" name="ip_addresses-MAX_NUM_FORMS" value="1000">
+
+
+        <input type="hidden" name="device_id" id="edit-device-id">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Device</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row">
+
+            <!-- Department -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Department</label>
+              <select name="department" id="edit-department" class="form-select">
+                {% for dept in departments %}
+                  <option value="{{ dept.id }}">{{ dept.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Name -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" name="name" id="edit-name" class="form-control">
+            </div>
+
+            <!-- MAC Address -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">MAC Address</label>
+              <input type="text" name="mac_address" id="edit-mac" class="form-control">
+            </div>
+
+            <!-- AnyDesk -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">AnyDesk</label>
+              <input type="text" name="any_desk" id="edit-anydesk" class="form-control">
+            </div>
+
+            <!-- RustDesk -->
+            <div class="col-md-6 mb-3">
+              <label class="form-label">RustDesk</label>
+              <input type="text" name="rust_desk" id="edit-rustdesk" class="form-control">
+            </div>
+
+            <!-- Remote Desktop -->
+            <div class="col-12 mb-3">
+              <label class="form-check">
+                <input type="checkbox" name="remote_desktop" id="edit-remote" class="form-check-input">
+                <span class="form-check-label">Remote Desktop Enabled</span>
+              </label>
+            </div>
+
+            <!-- IP Addresses FormSet -->
+            <div class="col-12 mb-3">
+              <label class="form-label">IP Addresses</label>
+              <div id="edit-ip-addresses-container">
+                <!-- Aquí se llenarán los inputs dinámicamente con JS -->
+              </div>
+              <button type="button" class="btn btn-sm btn-secondary" id="edit-add-ip">Add IP</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+ <div class="modal modal-blur fade" id="modal-delete" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <form method="post" id="form-delete">
+        {% csrf_token %}
+        <input type="hidden" name="delete_device" value="1">
+        <input type="hidden" name="device_id" id="delete-device-id">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete Device</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Are you sure you want to delete 
+            <strong id="delete-device-name"></strong> 
+            from 
+            <strong id="delete-device-department"></strong>?
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal Department-->
+<!-- Modal Department -->
+<div class="modal modal-blur fade" id="modal-department" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <form method="post" action="{% url 'create_department_in_pc_tablet_server' %}">
+        {% csrf_token %}
+
+        <div class="modal-header">
+          <h5 class="modal-title">Create department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label class="form-label">Branch</label>
+            {{ department_form.branch }}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            {{ department_form.name }}
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">
+            Cancel
+          </button>
+
+          <button type="submit" class="btn btn-primary">
+            Save Department
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="modal-content">
+
+        <table class="table table-striped table-hover table-vcenter align-middle">
+            <thead>
+              <tr>
+              
+                <th class="text-center">LIST OF AVAILABLE DEPARTMENTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for dept in departments %}
+              <tr>              
+                <td class="text-center">{{ dept.name }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+
+
+ 
+
+  </div>
+</div>
+
+<!-- Simple Datatables CSS -->
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet">
+
+<!-- Simple Datatables JS -->
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" ></script>
+
+<!--Datatable-->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const tables = document.querySelectorAll(".datatable");
+
+  tables.forEach(table => {
+    new simpleDatatables.DataTable(table, {
+      columns: [
+        {
+          select: 8,
+          sortable: false
+        }
+      ]
+    });
+  });
+
+});
+</script>
+
+<!-- Edit Modal Script -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const editButtons=document.querySelectorAll(".btn-edit");
+const ipContainer=document.getElementById("edit-ip-addresses-container");
+const addButton=document.getElementById("edit-add-ip");
+
+const totalForms=document.getElementById("edit-total-forms");
+const initialForms=document.getElementById("edit-initial-forms");
+
+function createIpField(index, value="", id=null){
+
+let html=`
+<div class="input-group mb-2 ip-field">
+
+${id ? `<input type="hidden" name="ip_addresses-${index}-id" value="${id}">` : ""}
+
+<input type="text"
+name="ip_addresses-${index}-ip_address"
+value="${value}"
+class="form-control">
+
+<input type="checkbox"
+name="ip_addresses-${index}-DELETE"
+class="d-none delete-flag">
+
+<button type="button"
+class="btn btn-outline-danger remove-ip">
+Remove
+</button>
+
+</div>
+`;
+
+const div=document.createElement("div");
+div.innerHTML=html;
+
+return div.firstElementChild;
+}
+
+editButtons.forEach(button=>{
+
+button.addEventListener("click",function(){
+
+const deviceId=this.dataset.id;
+
+document.getElementById("edit-device-id").value=deviceId;
+
+document.getElementById("edit-name").value=this.dataset.name;
+document.getElementById("edit-mac").value=this.dataset.mac;
+document.getElementById("edit-anydesk").value=this.dataset.anydesk;
+document.getElementById("edit-rustdesk").value=this.dataset.rustdesk;
+
+document.getElementById("edit-remote").checked=
+this.dataset.remote==="True" || this.dataset.remote==="true";
+
+document.getElementById("edit-department").value=this.dataset.department;
+
+ipContainer.innerHTML="";
+
+let ips=[];
+
+try{
+ips=JSON.parse(this.dataset.ip);
+}catch{
+ips=[];
+}
+
+let index=0;
+
+ips.forEach(ip=>{
+
+const field=createIpField(index,ip.ip,ip.id);
+
+ipContainer.appendChild(field);
+
+index++;
+
+});
+
+if(ips.length===0){
+
+ipContainer.appendChild(createIpField(0));
+
+index=1;
+
+}
+
+totalForms.value=index;
+initialForms.value=ips.length;
+
+});
+
+});
+
+addButton.addEventListener("click",function(){
+
+let index=parseInt(totalForms.value);
+
+const field=createIpField(index);
+
+ipContainer.appendChild(field);
+
+totalForms.value=index+1;
+
+});
+
+ipContainer.addEventListener("click",function(e){
+
+if(e.target.classList.contains("remove-ip")){
+
+const field=e.target.closest(".ip-field");
+
+const deleteFlag=field.querySelector(".delete-flag");
+
+if(deleteFlag){
+
+deleteFlag.checked=true;
+field.style.display="none";
+
+}else{
+
+field.remove();
+
+totalForms.value=ipContainer.querySelectorAll(".ip-field").length;
+
+}
+
+}
+
+});
+
+});
+
+</script>
+
+
+
+
+
+<!--Delete modal-->
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+
+    const deleteButtons = document.querySelectorAll(".btn-delete");
+
+    deleteButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const deviceId = this.dataset.id;
+        const deviceName = this.dataset.name;
+        const deptName = this.dataset.departmentName; // <- aquí tomamos el nombre
+
+        document.getElementById("delete-device-id").value = deviceId;
+        document.getElementById("delete-device-name").textContent = deviceName;
+        document.getElementById("delete-device-department").textContent = deptName;
+      });
+    });
+
+  });
+  </script>
+  <!-- IP Addresses FormSet Script -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const container = document.getElementById("ip-addresses-container");
+    const addButton = document.getElementById("add-ip");
+
+    // Total forms del management form de Django
+    const totalForms = document.getElementById("id_ip_addresses-TOTAL_FORMS");
+
+    // Función para crear un input IP desde cero
+    function createIpField(index, value = "") {
+      const div = document.createElement("div");
+      div.className = "input-group mb-2 ip-field";
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.name = `ip_addresses-${index}-ip_address`;
+      input.id = `id_ip_addresses-${index}-ip_address`;
+      input.value = value;
+      input.className = "form-control";
+
+      div.appendChild(input);
+
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "btn btn-outline-danger btn-sm remove-ip";
+      removeBtn.textContent = "Remove";
+
+      div.appendChild(removeBtn);
+
+      return div;
+    }
+
+    // Agregar nuevo IP
+    addButton.addEventListener("click", function () {
+      let index = parseInt(totalForms.value);
+      const newField = createIpField(index);
+      container.appendChild(newField);
+      totalForms.value = index + 1;
+    });
+
+    // Eliminar IP
+    container.addEventListener("click", function (e) {
+      if (e.target.classList.contains("remove-ip")) {
+        const field = e.target.closest(".ip-field");
+        field.remove();
+
+        // Reindexar los campos para que Django FormSet los reconozca
+        const fields = container.querySelectorAll(".ip-field input");
+        fields.forEach((input, idx) => {
+          input.name = `ip_addresses-${idx}-ip_address`;
+          input.id = `id_ip_addresses-${idx}-ip_address`;
+        });
+
+        totalForms.value = fields.length;
+      }
+    });
+
+  });
+  </script>
+
+   {% endblock%}

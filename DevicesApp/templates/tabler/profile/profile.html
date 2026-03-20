@@ -1,0 +1,303 @@
+{% extends '../index.html' %}
+{% load static %}
+  
+{% block page_wrapper %}
+  <div class="page-wrapper custom-list-page">
+	 {% block wraper_body %}
+	<div class="page-body">
+{% load static %}
+
+<!-- ======================
+TABLER USER CRUD TEMPLATE
+====================== -->
+
+<div class="container-xl">
+
+  <div class="row">
+    
+    <!-- PROFILE CARD -->
+    <div class="col-md-4">
+      <div class="card">
+        
+        <div class="card-body text-center">
+          
+          <!-- AVATAR -->
+          {% if user_obj.pictures %}
+            <span class="avatar avatar-xl mb-3"
+                  style="background-image: url('{{ user_obj.pictures.url }}')"></span>
+          {% else %}
+            <span class="avatar avatar-xl mb-3">U</span>
+          {% endif %}
+
+          <!-- NAME -->
+          <h3 class="m-0">
+            {{ user_obj.first_name }} {{ user_obj.last_name }}
+          </h3>
+
+          <div class="text-muted">
+            {{ user_obj.username }}
+          </div>
+
+          <!-- BADGES -->
+          <div class="mt-3">
+            {% if user_obj.is_staff %}
+              <span class="badge bg-blue">Staff</span>
+            {% endif %}
+
+            {% if user_obj.is_superuser %}
+              <span class="badge bg-purple">Admin</span>
+            {% endif %}
+
+            {% if user_obj.is_active %}
+              <span class="badge bg-success">Active</span>
+            {% else %}
+              <span class="badge bg-danger">Inactive</span>
+            {% endif %}
+          </div>
+
+        </div>
+
+        <div class="card-footer text-center">
+          <div class="row">
+            <div class="col">
+              <div class="font-weight-medium">
+                Joined
+              </div>
+              <div class="text-muted">
+                {{ user_obj.date_joined|date:"Y-m-d" }}
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="font-weight-medium">
+                Last Login
+              </div>
+              <div class="text-muted">
+                {{ user_obj.last_login|date:"Y-m-d H:i" }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FORM -->
+  <!-- ======================
+PROFILE EDIT TEMPLATE COMPLETO
+====================== -->
+<div class="col-md-8">
+  <div class="card">
+
+    <div class="card-header">
+      <h3 class="card-title">Edit Profile</h3>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="card-body">
+        <div class="row">
+
+          <!-- USERNAME -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Username</label>
+            {{ form.username }}
+          </div>
+
+          <!-- EMAIL -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Email</label>
+            {{ form.email }}
+          </div>
+
+          <!-- FIRST NAME -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">First Name</label>
+            {{ form.first_name }}
+          </div>
+
+          <!-- LAST NAME -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Last Name</label>
+            {{ form.last_name }}
+          </div>
+
+          <!-- PHONE NUMBER -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Phone</label>
+            {{ form.phone_number }}
+          </div>
+
+          <!-- DEPARTMENT -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Department</label>
+            {{ form.department }}
+          </div>
+
+          <!-- PROFILE PICTURE -->
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Profile Picture</label>
+            {{ form.pictures }}
+          </div>
+
+          <!-- SWITCHES -->
+          <div class="col-md-4 mb-3">
+            <label class="form-check form-switch">
+              {{ form.is_active }}
+              <span class="form-check-label">Active</span>
+            </label>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-check form-switch">
+              {{ form.is_staff }}
+              <span class="form-check-label">Staff</span>
+            </label>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label class="form-check form-switch">
+              {{ form.is_superuser }}
+              <span class="form-check-label">Superuser</span>
+            </label>
+          </div>
+
+          <!-- GROUPS -->
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Groups</label>
+            {{ form.groups }}
+          </div>
+
+          <!-- USER PERMISSIONS -->
+          <div class="col-md-12 mb-3">
+            <label class="form-label">User Permissions</label>
+            {{ form.user_permissions }}
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card-footer text-end">
+        <button class="btn btn-primary">Save Changes</button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- PASSWORD RESET CARD -->
+  <div class="card mt-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <div>
+        <h4 class="mb-1">Password</h4>
+        <div class="text-muted">Change your password securely</div>
+      </div>
+      <a href="{% url 'password_change' %}" class="btn btn-warning">Change Password</a>
+    </div>
+  </div>
+</div>
+
+  </div>
+
+</div>
+
+
+
+
+
+	
+	</div>
+			{% endblock %}
+			{% block footer%}
+			{% include '../partials/footer.html'%}
+				{% endblock %}
+	</div>
+
+
+
+		<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll(".toggle-password").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+      const targetId = this.getAttribute("data-target");
+      const span = document.getElementById(targetId);
+
+      const realPassword = span.getAttribute("data-password");
+
+      if (span.textContent === "********") {
+        span.textContent = realPassword;
+      } else {
+        span.textContent = "********";
+      }
+
+    });
+  });
+
+});
+</script>
+
+
+<!-- ======================
+JS
+====================== -->
+<script>
+// Toggle password
+
+document.querySelectorAll('.toggle-password').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const target = document.getElementById(this.dataset.target);
+    const real = target.dataset.password;
+
+    target.textContent = target.textContent === '********' ? real : '********';
+  });
+});
+
+// Fill edit modal
+
+document.querySelectorAll('.edit-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.getElementById('edit-id').value = this.dataset.id;
+    document.getElementById('edit-username').value = this.dataset.username;
+    document.getElementById('edit-email').value = this.dataset.email;
+    document.getElementById('edit-phone').value = this.dataset.phone;
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Preload groups and permissions
+  const userGroups = {{ user_groups_ids|safe }};
+  const userPermissions = {{ user_permissions_ids|safe }};
+
+  const groupsSelect = document.getElementById("id_groups");
+  const permsSelect = document.getElementById("id_user_permissions");
+
+  if (groupsSelect && userGroups.length) {
+    Array.from(groupsSelect.options).forEach(option => {
+      option.selected = userGroups.includes(parseInt(option.value));
+    });
+  }
+
+  if (permsSelect && userPermissions.length) {
+    Array.from(permsSelect.options).forEach(option => {
+      option.selected = userPermissions.includes(parseInt(option.value));
+    });
+  }
+
+  // Preload switches
+  const switches = ["id_is_active", "id_is_staff", "id_is_superuser"];
+  switches.forEach(switchId => {
+    const el = document.getElementById(switchId);
+    if (el) {
+      el.checked = el.defaultChecked;
+    }
+  });
+
+});
+</script>
+
+{% endblock %}

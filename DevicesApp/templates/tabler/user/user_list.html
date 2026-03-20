@@ -1,0 +1,464 @@
+{% extends '../index.html' %}
+{% load static %}
+  
+{% block page_wrapper %}
+  <div class="page-wrapper custom-list-page">
+	 {% block wraper_body %}
+     <div class="page-body">
+ {% load static %}
+
+<!-- ======================
+TABLER USER CRUD TEMPLATE
+====================== -->
+
+<div class="container-xl">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <h3 class="card-title">Users</h3>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">
+        + New User
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-vcenter table-hover">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Department</th>
+            <th>Password</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>
+              {% if user.pictures %}
+              <span class="avatar avatar-md" style="background-image:url('{{ user.pictures.url }}')"></span>
+              {% else %}
+              <span class="avatar avatar-md">U</span>
+              {% endif %}
+            </td>
+
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.department.name }}</td>
+
+            <td>
+              <div class="d-flex gap-2">
+                <span id="pass-{{ user.id }}" data-password="{{ user.password }}">********</span>
+                <button class="btn btn-sm btn-icon toggle-password" data-target="pass-{{ user.id }}">
+                  👁️
+                </button>
+              </div>
+            </td>
+
+            <td>
+              {% if user.is_active %}
+              <span class="badge bg-success">Active</span>
+              {% else %}
+              <span class="badge bg-danger">Inactive</span>
+              {% endif %}
+            </td>
+
+            <td>
+              <button class="btn btn-sm btn-primary edit-btn"
+                      data-id="{{ user.id }}"
+                      data-username="{{ user.username }}"
+                      data-email="{{ user.email }}"
+                      data-phone="{{ user.phone_number }}"
+                      data-department="{{ user.department_id }}"
+                      data-is-active="{{ user.is_active }}"
+                      data-is-staff="{{ user.is_staff }}"
+                      data-is-superuser="{{ user.is_superuser }}"
+                      data-groups='{{ user.groups_ids|safe }}'
+                      data-permissions='{{ user.permissions_ids|safe }}'
+                      data-bs-toggle="modal"
+                      data-bs-target="#editUserModal">
+                     <svg xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                      stroke-width="2" 
+                      stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-pencil">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                      <path d="M13.5 6.5l4 4" /></svg>
+                      Edit
+              </button>
+
+                  <!-- Delete Button -->
+          <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                  data-bs-target="#deleteUserModal" 
+                  data-user-id="{{ user.id }}"
+                  data-username="{{ user.username }}">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                   width="24" height="24"
+                    viewBox="0 0 24 24" 
+                    fill="none"
+                     stroke="currentColor" 
+                     stroke-width="2" 
+                     stroke-linecap="round" 
+                     stroke-linejoin="round" 
+                     class="icon icon-tabler icons-tabler-outline icon-tabler-trash-off">
+                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                     <path d="M3 3l18 18" /><path d="M4 7h3m4 0h9" />
+                     <path d="M10 11l0 6" /><path d="M14 14l0 3" />
+                     <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l.077 -.923" />
+                     <path d="M18.384 14.373l.616 -7.373" />
+                    <path d="M9 5v-1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                  </svg>
+            Delete
+          </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======================
+CREATE MODAL
+====================== -->
+<div class="modal modal-blur fade" id="createUserModal">
+  <div class="modal-dialog modal-lg">
+    <form method="POST" enctype="multipart/form-data" class="modal-content">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="create">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Create User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+ <div class="modal-body row">
+
+        <!-- USERNAME -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Username</label>
+          {{ form.username }}
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Password</label>
+          {{ form.password }}
+        </div>
+
+        <!-- FIRST NAME -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">First Name</label>
+          {{ form.first_name }}
+        </div>
+
+        <!-- LAST NAME -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Last Name</label>
+          {{ form.last_name }}
+        </div>
+
+        <!-- EMAIL -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Email</label>
+          {{ form.email }}
+        </div>
+
+        <!-- PHONE NUMBER -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Phone Number</label>
+          {{ form.phone_number }}
+        </div>
+
+        <!-- DEPARTMENT -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Department</label>
+          {{ form.department }}
+        </div>
+
+        <!-- PICTURES -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Profile Picture</label>
+          {{ form.pictures }}
+        </div>
+
+        <!-- IS ACTIVE -->
+        <div class="col-md-4 mb-3">
+          <label class="form-check form-switch">
+            {{ form.is_active }}
+            <span class="form-check-label">Active</span>
+          </label>
+        </div>
+
+        <!-- IS STAFF -->
+        <div class="col-md-4 mb-3">
+          <label class="form-check form-switch">
+            {{ form.is_staff }}
+            <span class="form-check-label">Staff</span>
+          </label>
+        </div>
+
+        <!-- IS SUPERUSER -->
+        <div class="col-md-4 mb-3">
+          <label class="form-check form-switch">
+            {{ form.is_superuser }}
+            <span class="form-check-label">Superuser</span>
+          </label>
+        </div>
+
+        <!-- GROUPS -->
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Groups</label>
+          {{ form.groups }}
+        </div>
+
+        <!-- USER PERMISSIONS -->
+        <div class="col-md-12 mb-3">
+          <label class="form-label">User Permissions</label>
+          {{ form.user_permissions }}
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ======================
+EDIT MODAL
+====================== -->
+<!-- ======================
+EDIT MODAL
+====================== -->
+<div class="modal modal-blur fade" id="editUserModal">
+  <div class="modal-dialog modal-lg">
+    <form method="POST" enctype="multipart/form-data" class="modal-content">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="edit">
+      <input type="hidden" name="user_id" id="edit-id">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Edit User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body row">
+        <!-- Username -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" name="username" id="edit-username" class="form-control">
+        </div>
+
+        <!-- First Name -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">First Name</label>
+          <input type="text" name="first_name" id="edit-first-name" class="form-control">
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Last Name</label>
+          <input type="text" name="last_name" id="edit-last-name" class="form-control">
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" id="edit-email" class="form-control">
+        </div>
+
+        <!-- Phone Number -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Phone Number</label>
+          <input type="text" name="phone_number" id="edit-phone" class="form-control">
+        </div>
+
+        <!-- Department -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Department</label>
+          <select name="department" id="edit-department" class="form-select">
+            <option value="">Select Department</option>
+            {% for dept in departments %}
+              <option value="{{ dept.id }}">{{ dept.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Profile Picture</label>
+          <input type="file" name="pictures" id="edit-pictures" class="form-control">
+        </div>
+
+        <!-- Status Switches -->
+        <div class="col-md-4 mb-3">
+          <label class="form-check form-switch">
+            <input type="checkbox" name="is_active" id="edit-is-active" class="form-check-input">
+            <span class="form-check-label">Active</span>
+          </label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-check form-switch">
+            <input type="checkbox" name="is_staff" id="edit-is-staff" class="form-check-input">
+            <span class="form-check-label">Staff</span>
+          </label>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label class="form-check form-switch">
+            <input type="checkbox" name="is_superuser" id="edit-is-superuser" class="form-check-input">
+            <span class="form-check-label">Superuser</span>
+          </label>
+        </div>
+
+        <!-- Groups -->
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Groups</label>
+          <select name="groups" id="edit-groups" class="form-select" multiple>
+            {% for group in groups %}
+              <option value="{{ group.id }}">{{ group.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- User Permissions -->
+        <div class="col-md-12 mb-3">
+          <label class="form-label">User Permissions</label>
+          <select name="user_permissions" id="edit-permissions" class="form-select" multiple>
+            {% for perm in permissions %}
+              <option value="{{ perm.id }}">{{ perm.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Password (opcional) -->
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Password (leave blank to keep current)</label>
+          <input type="password" name="password" id="edit-password" class="form-control">
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ======================
+DELETE CONFIRM MODAL
+====================== -->
+<!-- DELETE CONFIRMATION MODAL -->
+<div class="modal modal-blur fade" id="deleteUserModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-top" role="document">
+    <form method="POST" class="modal-content">
+      {% csrf_token %}
+      <input type="hidden" name="delete_id" id="delete-user-id">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <p>Are you sure you want to delete user <strong id="delete-username"></strong>?</p>
+        <p class="text-danger">This action cannot be undone.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+          
+ 
+			{% endblock %}
+			{% block footer%}
+			{% include '../partials/footer.html'%}
+				{% endblock %}
+	</div>
+
+
+<script>
+// Toggle password
+document.querySelectorAll('.toggle-password').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const target = document.getElementById(this.dataset.target);
+    target.textContent = target.textContent === '********' ? target.dataset.password : '********';
+  });
+});
+
+// Fill edit modal
+document.querySelectorAll('.edit-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const userId = this.dataset.id;
+    document.getElementById('edit-id').value = userId;
+    document.getElementById('edit-username').value = this.dataset.username;
+    document.getElementById('edit-email').value = this.dataset.email;
+    document.getElementById('edit-phone').value = this.dataset.phone;
+    document.getElementById('edit-first-name').value = this.dataset.firstName || "";
+    document.getElementById('edit-last-name').value = this.dataset.lastName || "";
+
+    // Department
+    const deptSelect = document.getElementById('edit-department');
+    deptSelect.value = this.dataset.department || "";
+
+    // Status
+    document.getElementById('edit-is-active').checked = this.dataset.isActive === "True" || this.dataset.isActive === "true";
+    document.getElementById('edit-is-staff').checked = this.dataset.isStaff === "True" || this.dataset.isStaff === "true";
+    document.getElementById('edit-is-superuser').checked = this.dataset.isSuperuser === "True" || this.dataset.isSuperuser === "true";
+
+    // Groups & Permissions
+    const userGroups = JSON.parse(this.dataset.groups || "[]");
+    const userPerms = JSON.parse(this.dataset.permissions || "[]");
+
+    const groupSelect = document.getElementById('edit-groups');
+    Array.from(groupSelect.options).forEach(opt => opt.selected = userGroups.includes(parseInt(opt.value)));
+
+    const permSelect = document.getElementById('edit-permissions');
+    Array.from(permSelect.options).forEach(opt => opt.selected = userPerms.includes(parseInt(opt.value)));
+  });
+});
+
+// Fill delete modal
+
+document.addEventListener("DOMContentLoaded", function () {
+  var deleteModal = document.getElementById('deleteUserModal');
+  deleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget; // Botón que disparó el modal
+    var userId = button.getAttribute('data-user-id');
+    var username = button.getAttribute('data-username');
+
+    // Set values en el modal
+    document.getElementById('delete-user-id').value = userId;
+    document.getElementById('delete-username').textContent = username;
+  });
+});
+
+</script>
+
+	
+
+{% endblock %}

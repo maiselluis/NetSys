@@ -1,0 +1,209 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign in - NetSys</title>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="{% static 'dist/css/tabler.min.css' %}" rel="stylesheet" />
+   <link rel="icon" href="{% static 'icons/netsys_logo.ico' %}">
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link href="{% static 'dist/css/tabler-flags.css' %}" rel="stylesheet" />
+    <link href="{% static 'dist/css/tabler-socials.css' %}" rel="stylesheet" />
+    <link href="{% static 'dist/css/tabler-payments.css' %}" rel="stylesheet" />
+    <link href="{% static 'dist/css/tabler-vendors.css' %}" rel="stylesheet" />
+    <link href="{% static 'dist/css/tabler-marketing.css' %}" rel="stylesheet" />
+    <link href="{% static 'dist/css/tabler-themes.css' %}" rel="stylesheet" />
+    <!-- END PLUGINS STYLES -->
+    <!-- BEGIN DEMO STYLES -->
+    <link href="{% static 'dist/preview/css/demo.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'dist/preview/css/demo.css' %}" rel="stylesheet" />
+    <!-- END DEMO STYLES -->
+    <!-- BEGIN CUSTOM FONT -->
+    <style>
+      @import url("https://rsms.me/inter/inter.css");
+    </style>
+    <!-- END CUSTOM FONT -->
+  </head>
+  <body>
+    <!-- BEGIN GLOBAL THEME SCRIPT -->
+    <script src="{% static 'dist/js/tabler-theme.min.js' %}"></script>
+    <!-- END GLOBAL THEME SCRIPT -->
+    <div class="page page-center">
+      <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+       <a href="." aria-label="Tabler" class="navbar-brand navbar-brand-autodark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="140" height="40" viewBox="0 0 140 40" fill="none" class="navbar-brand-image" viewBox="0 0 140 40" overflow="visible">
+              
+              <!-- Dispositivo -->
+              <rect x="2" y="6" width="36" height="28" rx="6" fill="#066fd1"/>
+
+              <!-- Pantalla -->
+              <rect x="6" y="10" width="28" height="16" rx="3" fill="#ffffff" opacity="0.15"/>
+
+              <!-- Nodos -->
+              <circle cx="60" cy="12" r="3" fill="#066fd1"/>
+              <circle cx="80" cy="20" r="3" fill="#066fd1"/>
+              <circle cx="60" cy="28" r="3" fill="#066fd1"/>
+
+              <!-- Conexiones -->
+              <line x1="38" y1="20" x2="60" y2="12" stroke="#066fd1" stroke-width="2" stroke-linecap="round"/>
+              <line x1="38" y1="20" x2="80" y2="20" stroke="#066fd1" stroke-width="2" stroke-linecap="round"/>
+              <line x1="38" y1="20" x2="60" y2="28" stroke="#066fd1" stroke-width="2" stroke-linecap="round"/>
+
+              <!-- Texto mejorado -->
+              <text x="95" y="26" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#4a4a4a">
+                NetSys
+              </text>
+
+            </svg>
+              
+              </a><!-- END NAVBAR LOGO -->
+        </div>
+        <div class="card card-md">
+          <div class="card-body">
+            <h2 class="h2 text-center mb-4">Login to your account</h2>
+         <form method="post" autocomplete="off" novalidate>
+            {% csrf_token %}
+
+            <!-- ERRORES -->
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" name="username" class="form-control" placeholder="Enter username" required />
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label">Password</label>
+              <div class="input-group input-group-flat">
+                <input type="password" name="password" class="form-control" placeholder="Your password" required />
+                <span class="input-group-text">
+                  <a href="#" class="link-secondary toggle-password" title="Show password">
+                    <!-- Icono ojo Tabler -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                      stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
+                      <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
+                    </svg>
+                  </a>
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-check" for="remember_me">
+                 <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">
+                <span class="form-check-label">Remember me</span>
+              </label>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="btn btn-primary w-100">Sign in</button>
+            </div>
+          </form>
+          </div>
+         
+        </div>
+      
+      </div>
+    </div>
+ 
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'dist/js/tabler.min.js' %}" defer></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <!-- BEGIN DEMO SCRIPTS -->
+    <script src="{% static 'dist/preview/js/demo.min.js' %}" defer></script>
+    <!-- END DEMO SCRIPTS -->
+    <!-- BEGIN PAGE SCRIPTS -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var themeConfig = {
+          theme: "light",
+          "theme-base": "gray",
+          "theme-font": "sans-serif",
+          "theme-primary": "blue",
+          "theme-radius": "1",
+        };
+        var url = new URL(window.location);
+        var form = document.getElementById("offcanvasSettings");
+        var resetButton = document.getElementById("reset-changes");
+        var checkItems = function () {
+          for (var key in themeConfig) {
+            var value = window.localStorage["tabler-" + key] || themeConfig[key];
+            if (!!value) {
+              var radios = form.querySelectorAll(`[name="${key}"]`);
+              if (!!radios) {
+                radios.forEach((radio) => {
+                  radio.checked = radio.value === value;
+                });
+              }
+            }
+          }
+        };
+        form.addEventListener("change", function (event) {
+          var target = event.target,
+            name = target.name,
+            value = target.value;
+          for (var key in themeConfig) {
+            if (name === key) {
+              document.documentElement.setAttribute("data-bs-" + key, value);
+              window.localStorage.setItem("tabler-" + key, value);
+              url.searchParams.set(key, value);
+            }
+          }
+          window.history.pushState({}, "", url);
+        });
+        resetButton.addEventListener("click", function () {
+          for (var key in themeConfig) {
+            var value = themeConfig[key];
+            document.documentElement.removeAttribute("data-bs-" + key);
+            window.localStorage.removeItem("tabler-" + key);
+            url.searchParams.delete(key);
+          }
+          checkItems();
+          window.history.pushState({}, "", url);
+        });
+        checkItems();
+      });
+    </script>
+    <!-- END PAGE SCRIPTS -->
+  </body>
+</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleBtn = document.querySelector(".toggle-password");
+  const passwordInput = document.querySelector('input[name="password"]');
+
+  toggleBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+
+    // Cambiar icono
+    this.innerHTML = isPassword
+      ? `<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3l18 18"/>
+          <path d="M10.58 10.58a2 2 0 1 0 2.83 2.83"/>
+          <path d="M9.36 5.36c.87-.24 1.77-.36 2.64-.36c3.6 0 6.6 2 9 6c-.73 1.21-1.58 2.25-2.54 3.13"/>
+          <path d="M6.53 6.53c-1.9 1.13-3.5 2.83-4.53 5.47c2.4 4 5.4 6 9 6c1.1 0 2.16-.18 3.16-.53"/>
+        </svg>`
+      : `<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
+          <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
+        </svg>`;
+  });
+});
+</script>
