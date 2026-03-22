@@ -7,7 +7,8 @@ from    .views import (home,pc_tablet_server_list,
                        create_department_in_pc_tablet_server,
                        switch_routers_list,email_list,printer_list,
                        user_list,profile_view,password_change_view,
-                       logout_view,department_list)
+                       logout_view,department_list,branch_list
+                       )
 
 urlpatterns = [
     path ('',home, name='home'),
@@ -22,5 +23,7 @@ urlpatterns = [
     path('profile/', profile_view, name='profile'),
     path('logout/', logout_view, name='logout'),
     path('department_list/',department_list, name='department_list'),
+    path('branch_list/',branch_list, name='branch_list'),
+
   
 ]

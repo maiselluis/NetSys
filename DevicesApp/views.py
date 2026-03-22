@@ -16,15 +16,134 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import logout
+from django.db.models import Count
+from django.db.models.functions import Lower
 
 
 
 # Create your views here.
+#def home(request):
+ #   if request.user.is_authenticated:
+ #       return render(request, 'tabler/index.html')
+
+ #   if request.method == "POST":
+ #       username = request.POST.get("username")
+ #       password = request.POST.get("password")
+ #       remember_me = request.POST.get("remember_me")
+
+ #       user = authenticate(request, username=username, password=password)
+
+ #       if user is not None:
+ #           login(request, user)
+            
+#            if not remember_me:
+ #               request.session.set_expiry(0)  
+                # 👉 sesión expira al cerrar navegador
+#            else:
+#                request.session.set_expiry(1209600)  
+                # 👉 2 semanas (puedes cambiarlo)
+ #           return redirect('home')
+#        else:
+#            messages.error(request, "Invalid username or password")
+            
+       
+
+ #   return render(request, 'login.html')
+ 
+ 
+
+
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'tabler/index.html')
 
+        # ======================
+        # KPIs PRINCIPALES
+        # ======================
+        total_branches = Branch.objects.count()
+        total_departments = Department.objects.count()
+        total_users = CustomUser.objects.count()
+        total_devices = Pc_tablet_server.objects.count()
+        total_printers = Printer.objects.count()
+        total_switches = Switch_router.objects.count()
+
+        # ======================
+        # DEVICES
+        # ======================
+        devices_remote = Pc_tablet_server.objects.filter(remote_desktop=True).count()
+
+        devices_without_ip = Pc_tablet_server.objects.annotate(
+            ip_count=Count('ip_addresses')
+        ).filter(ip_count=0).count()
+
+        # ======================
+        # DEPARTMENTS ANALYSIS
+        # ======================
+        departments_without_devices = Department.objects.annotate(
+            device_count=Count('devices')
+        ).filter(device_count=0).count()
+
+        departments_without_printers = Department.objects.annotate(
+            printer_count=Count('printers')
+        ).filter(printer_count=0).count()
+
+        departments_without_emails = Department.objects.annotate(
+            email_count=Count('emails')
+        ).filter(email_count=0).count()
+
+        # ======================
+        # NETWORK
+        # ======================
+        total_ips = PcIpAddress.objects.count()
+
+        switches_without_config = Switch_router.objects.filter(file_settings="").count()
+
+        # ======================
+        # TOP DEPARTMENTS
+        # ======================
+        top_departments = Department.objects.annotate(
+            total_devices=Count('devices')
+        ).order_by('-total_devices')[:5]
+
+        # ======================
+        # DEVICES PER BRANCH
+        # ======================
+        devices_per_branch = Branch.objects.annotate(
+            total_devices=Count('departments__devices')
+        )
+
+        context = {
+            # KPIs
+            "total_branches": total_branches,
+            "total_departments": total_departments,
+            "total_users": total_users,
+            "total_devices": total_devices,
+            "total_printers": total_printers,
+            "total_switches": total_switches,
+
+            # Devices
+            "devices_remote": devices_remote,
+            "devices_without_ip": devices_without_ip,
+
+            # Departments
+            "departments_without_devices": departments_without_devices,
+            "departments_without_printers": departments_without_printers,
+            "departments_without_emails": departments_without_emails,
+
+            # Network
+            "total_ips": total_ips,
+            "switches_without_config": switches_without_config,
+
+            # Ranking
+            "top_departments": top_departments,
+            "devices_per_branch": devices_per_branch,
+        }
+
+        return render(request, 'tabler/index.html', context)
+
+    # ======================
+    # LOGIN (NO TOCAR)
+    # ======================
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -34,18 +153,15 @@ def home(request):
 
         if user is not None:
             login(request, user)
-            
+
             if not remember_me:
-                request.session.set_expiry(0)  
-                # 👉 sesión expira al cerrar navegador
+                request.session.set_expiry(0)
             else:
-                request.session.set_expiry(1209600)  
-                # 👉 2 semanas (puedes cambiarlo)
+                request.session.set_expiry(1209600)
+
             return redirect('home')
         else:
             messages.error(request, "Invalid username or password")
-            
-       
 
     return render(request, 'login.html')
     
@@ -99,9 +215,6 @@ def department_list(request):
         'branches': branches,
     })
 
-
-
-#[Create department in PC_TABLET_SERVER form]
 
 
 def create_department_in_pc_tablet_server(request):
@@ -447,3 +560,35 @@ def password_change_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')  # te manda al login
+
+@login_required 
+def branch_list(request):
+    branch= Branch.objects.all()
+    
+    if request.method == "POST":
+        if "delete_branch" in request.POST:
+            branch_id = request.POST.get("branch_id")
+            branch = get_object_or_404(Branch, id=branch_id)
+            branch.delete()
+            return redirect("branch_list")   
+        
+        branch_id = request.POST.get("branch_id")
+        if branch_id:
+            branch = get_object_or_404(Branch, id=branch_id)
+            form = BranchForm(request.POST, instance=branch)
+        else:
+            form = BranchForm(request.POST)
+            
+            
+        if form.is_valid():
+            form.save()
+            return redirect("branch_list")
+   
+
+
+    else:
+        form = BranchForm()
+
+
+    
+    return render(request, 'tabler/branch/branch_list.html', {'branch': branch})
