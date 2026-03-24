@@ -192,30 +192,8 @@ class CustomUserForm(forms.ModelForm):
         
         
 class CustomUserUpdateForm(forms.ModelForm):
-    is_active = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
-    )
-    is_staff = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
-    )
-    is_superuser = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
-    )
-
-    groups = forms.ModelMultipleChoiceField(
-        queryset=Group.objects.all(),
-        required=False,
-        widget=forms.SelectMultiple(attrs={'class': 'form-select'})
-    )
-
-    user_permissions = forms.ModelMultipleChoiceField(
-        queryset=Permission.objects.all(),
-        required=False,
-        widget=forms.SelectMultiple(attrs={'class': 'form-select'})
-    )
+   
+     
 
     class Meta:
         model = CustomUser
@@ -227,11 +205,7 @@ class CustomUserUpdateForm(forms.ModelForm):
             'phone_number',
             'department',
             'pictures',
-            'is_active',
-            'is_staff',
-            'is_superuser',
-            'groups',
-            'user_permissions'
+           
         ]
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),
@@ -240,8 +214,7 @@ class CustomUserUpdateForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
             'department': forms.Select(attrs={'class': 'form-select'}),
-            'pictures': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'pictures': forms.ClearableFileInput(attrs={'class': 'form-control'}),            
         }
               
 
@@ -271,3 +244,18 @@ class DepartmentForm(forms.ModelForm):
             )
 
         return cleaned_data
+    
+
+class GroupForm(forms.ModelForm):
+    permissions = forms.ModelMultipleChoiceField(
+        queryset=Permission.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple(attrs={'class': 'form-select'})
+    )
+
+    class Meta:
+        model = Group
+        fields = ['name', 'permissions']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+        }

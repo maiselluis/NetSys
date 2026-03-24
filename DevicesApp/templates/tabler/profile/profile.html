@@ -141,39 +141,9 @@ PROFILE EDIT TEMPLATE COMPLETO
             {{ form.pictures }}
           </div>
 
-          <!-- SWITCHES -->
-          <div class="col-md-4 mb-3">
-            <label class="form-check form-switch">
-              {{ form.is_active }}
-              <span class="form-check-label">Active</span>
-            </label>
-          </div>
+         
 
-          <div class="col-md-4 mb-3">
-            <label class="form-check form-switch">
-              {{ form.is_staff }}
-              <span class="form-check-label">Staff</span>
-            </label>
-          </div>
-
-          <div class="col-md-4 mb-3">
-            <label class="form-check form-switch">
-              {{ form.is_superuser }}
-              <span class="form-check-label">Superuser</span>
-            </label>
-          </div>
-
-          <!-- GROUPS -->
-          <div class="col-md-12 mb-3">
-            <label class="form-label">Groups</label>
-            {{ form.groups }}
-          </div>
-
-          <!-- USER PERMISSIONS -->
-          <div class="col-md-12 mb-3">
-            <label class="form-label">User Permissions</label>
-            {{ form.user_permissions }}
-          </div>
+         
 
         </div>
       </div>
@@ -263,40 +233,6 @@ document.querySelectorAll('.edit-btn').forEach(btn => {
     document.getElementById('edit-email').value = this.dataset.email;
     document.getElementById('edit-phone').value = this.dataset.phone;
   });
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  // Preload groups and permissions
-  const userGroups = {{ user_groups_ids|safe }};
-  const userPermissions = {{ user_permissions_ids|safe }};
-
-  const groupsSelect = document.getElementById("id_groups");
-  const permsSelect = document.getElementById("id_user_permissions");
-
-  if (groupsSelect && userGroups.length) {
-    Array.from(groupsSelect.options).forEach(option => {
-      option.selected = userGroups.includes(parseInt(option.value));
-    });
-  }
-
-  if (permsSelect && userPermissions.length) {
-    Array.from(permsSelect.options).forEach(option => {
-      option.selected = userPermissions.includes(parseInt(option.value));
-    });
-  }
-
-  // Preload switches
-  const switches = ["id_is_active", "id_is_staff", "id_is_superuser"];
-  switches.forEach(switchId => {
-    const el = document.getElementById(switchId);
-    if (el) {
-      el.checked = el.defaultChecked;
-    }
-  });
-
 });
 </script>
 

@@ -7,7 +7,7 @@ from .models import (Branch, Department, CustomUser,
 from .forms import (PcTabletServerForm,PcIpAddressFormSet,
                     DepartmentForm,BranchForm,SwitchRouterForm,
                     EmailForm,PrinterForm,CustomUserForm,CustomUserUpdateForm,
-                    CustomPasswordChangeForm)
+                    CustomPasswordChangeForm,GroupForm)
 
 
 from django.contrib.auth.models import Group, Permission
@@ -18,6 +18,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import logout
 from django.db.models import Count
 from django.db.models.functions import Lower
+from django.contrib.contenttypes.models import ContentType
+from collections import defaultdict
 
 
 
@@ -66,6 +68,8 @@ def home(request):
         total_devices = Pc_tablet_server.objects.count()
         total_printers = Printer.objects.count()
         total_switches = Switch_router.objects.count()
+        total_emails = Email.objects.count()
+
 
         # ======================
         # DEVICES
@@ -137,6 +141,8 @@ def home(request):
             # Ranking
             "top_departments": top_departments,
             "devices_per_branch": devices_per_branch,
+            "total_emails": total_emails,
+            
         }
 
         return render(request, 'tabler/index.html', context)
@@ -167,12 +173,13 @@ def home(request):
     
 
 #Brnach views
+@login_required
 def branch_list(request):
     branches = Branch.objects.all()
     context = {'branches': branches}    
     return render(request, 'tabler/branch/branch_list.html', context)
     
-
+@login_required
 #Department views
 def department_list(request):
     departments = Department.objects.select_related('branch').all()
@@ -216,7 +223,7 @@ def department_list(request):
     })
 
 
-
+@login_required
 def create_department_in_pc_tablet_server(request):
     #branch_list = Branch.objects.all()
 
@@ -244,6 +251,7 @@ def create_department_in_pc_tablet_server(request):
 
 #[Cretae, Edit] views for Pc_tablet_server
 #Pc_tablet_server views
+@login_required
 def pc_tablet_server_list(request):
    # devices = Pc_tablet_server.objects.select_related("department")
     devices = Pc_tablet_server.objects.select_related("department").prefetch_related("ip_addresses")
@@ -300,6 +308,7 @@ def pc_tablet_server_list(request):
 
 
 #Switch_router views
+@login_required
 def switch_routers_list(request):
    # devices = Pc_tablet_server.objects.select_related("department")
     switch_routers = Switch_router.objects.all() 
@@ -344,7 +353,7 @@ def switch_routers_list(request):
 
     return render(request, 'tabler/switch_routers/switch_routers_list.html', context)
 
-
+@login_required
 def email_list(request):
     departments= Department.objects.all()
     emails = Email.objects.all()
@@ -386,7 +395,7 @@ def email_list(request):
     return render(request, 'tabler/email/email_list.html', context) 
 
 
-
+@login_required
 def printer_list(request):
     departments = Department.objects.all()
     printers = Printer.objects.all()
@@ -556,7 +565,7 @@ def password_change_view(request):
 
     return render(request, 'registration/password_change.html', {'form': form})
            
-
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('home')  # te manda al login
@@ -592,3 +601,45 @@ def branch_list(request):
 
     
     return render(request, 'tabler/branch/branch_list.html', {'branch': branch})
+
+
+def group_list(request):
+    groups = Group.objects.prefetch_related('permissions').all()
+
+    # 🔥 Agrupar permisos por app para mostrar en UI
+    permissions = Permission.objects.select_related('content_type')
+    grouped_permissions = defaultdict(list)
+    for perm in permissions:
+        app_label = perm.content_type.app_label
+        grouped_permissions[app_label].append(perm)
+
+    # Si es POST, crear/editar
+    if request.method == "POST":
+        group_id = request.POST.get("group_id")
+        if group_id:
+            instance = Group.objects.get(id=group_id)
+        else:
+            instance = None
+
+        form = GroupForm(request.POST, instance=instance)
+
+        if form.is_valid():
+            group = form.save()
+            # Asignar permisos seleccionados
+            group.permissions.set(form.cleaned_data['permissions'])
+            return redirect("group_list")
+        
+        # Si borras
+        if "delete_group" in request.POST:
+            group_id = request.POST.get("group_id")
+            Group.objects.get(id=group_id).delete()
+            return redirect("group_list")
+
+    else:
+        form = GroupForm()
+
+    return render(request, "tabler/groups/group_list.html", {
+        "groups": groups,
+        "grouped_permissions": dict(grouped_permissions),
+        "form": form,  # 🔥 ahora el template recibe form
+    })
